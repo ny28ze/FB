@@ -50,7 +50,7 @@ def report_post(post_url):
         print("[SUCCESS] Post reported successfully!")
     
     except Exception as e:
-        print(f"[ERROR] Failed to report post: {e}")
+        print("[ERROR] Failed to report post: {}".format(e))  # Python 2 compatible
 
 # Example usage (replace with a real post URL)
 post_url = "https://www.facebook.com/example-post"

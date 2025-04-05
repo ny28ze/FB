@@ -2,16 +2,18 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.chrome.service import Service
 import time
 
-# Configure Chrome for Termux (if using Chrome)
+# Configure Chrome for Termux
 options = webdriver.ChromeOptions()
 options.add_argument('--headless')  # Run in background (optional)
 options.add_argument('--no-sandbox')
 options.add_argument('--disable-dev-shm-usage')
 
-# Initialize WebDriver (replace with your chromedriver path)
-driver = webdriver.Chrome(executable_path='/data/data/com.termux/files/usr/bin/chromedriver', options=options)
+# Initialize WebDriver with Service object
+service = Service('/data/data/com.termux/files/usr/bin/chromedriver')
+driver = webdriver.Chrome(service=service, options=options)
 
 def report_post(post_url):
     try:
@@ -50,7 +52,7 @@ def report_post(post_url):
         print("[SUCCESS] Post reported successfully!")
     
     except Exception as e:
-        print("[ERROR] Failed to report post: {}".format(e))  # Python 2 compatible
+        print(f"[ERROR] Failed to report post: {e}")
 
 # Example usage (replace with a real post URL)
 post_url = "https://www.facebook.com/example-post"
